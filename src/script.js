@@ -1,73 +1,45 @@
-let web3;
-let contract;
-let accounts;
+// script.js
 
-const contractAddress = "";
-const contractABI = [];
-
-window.addEventListener('load', async () => {
+// Connect to the Ethereum wallet
+async function connectWallet() {
     if (window.ethereum) {
-        web3 = new Web3(window.ethereum);
-        contract = new web3.eth.Contract(contractABI, contractAddress);
+        try {
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
+            document.getElementById('walletAddress').innerText = `Connected: ${accounts[0]}`;
+        } catch (error) {
+            console.error('User rejected the request.');
+        }
     } else {
         alert('Please install MetaMask!');
     }
-});
-
-async function connectWallet() {
-    try {
-        accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        document.getElementById('walletAddress').innerText = Connected: ${accounts[0]};
-    } catch (error) {
-        console.error(error);
-        alert('Failed to connect wallet.');
-    }
 }
 
+// Mint tokens
 async function mintTokens() {
-    const toAddress = document.getElementById("mintAddress").value;
-    const amount = document.getElementById("mintAmount").value;
-
-    try {
-        await contract.methods.mint(toAddress, amount).send({ from: accounts[0] });
-        alert("Tokens minted successfully!");
-    } catch (err) {
-        console.error(err);
-        alert("Error minting tokens.");
-    }
+    const address = document.getElementById('mintAddress').value;
+    const amount = document.getElementById('mintAmount').value;
+    console.log(`Minting ${amount} tokens to ${address}`);
+    // Add your minting logic here
 }
 
+// Transfer tokens
 async function transferTokens() {
-    const toAddress = document.getElementById("transferTo").value;
-    const amount = document.getElementById("transferAmount").value;
-
-    try {
-        await contract.methods.transfer(toAddress, amount).send({ from: accounts[0] });
-        alert("Tokens transferred successfully!");
-    } catch (err) {
-        console.error(err);
-        alert("Error transferring tokens.");
-    }
+    const address = document.getElementById('transferTo').value;
+    const amount = document.getElementById('transferAmount').value;
+    console.log(`Transferring ${amount} tokens to ${address}`);
+    // Add your transfer logic here
 }
 
+// Burn tokens
 async function burnTokens() {
-    const amount = document.getElementById("burnAmount").value;
-
-    try {
-        await contract.methods.burn(amount).send({ from: accounts[0] });
-        alert("Tokens burned successfully!");
-    } catch (err) {
-        console.error(err);
-        alert("Error burning tokens.");
-    }
+    const amount = document.getElementById('burnAmount').value;
+    console.log(`Burning ${amount} tokens`);
+    // Add your burning logic here
 }
 
+// Get total supply
 async function getTotalSupply() {
-    try {
-        const supply = await contract.methods.totalSupply().call();
-        document.getElementById("totalSupply").innerText = Total Supply: ${supply};
-    } catch (err) {
-        console.error(err);
-        alert("Error getting total supply.");
-    }
+    console.log('Getting total supply');
+    // Add your logic to get total supply here
 }
