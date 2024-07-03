@@ -1,4 +1,4 @@
-![image](https://github.com/ashutoshsharan2003/ETH-AVAX-PROOF--Types-of-Functions/assets/141537249/c5e026b0-8018-4b55-a867-e755bb9bebfc) # WakandaPower  ERC2
+ # WakandaPower  ERC2
  This is a Solidity smart contract called "WakandaPower" that inherits from the OpenZeppelin ERC20 and Ownable contracts. 
 
 
