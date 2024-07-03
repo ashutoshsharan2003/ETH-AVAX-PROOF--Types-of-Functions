@@ -11,9 +11,8 @@ contract WakandaPower is ERC20, Ownable {
         TOTAL_SUPPLY = 100000000 * 10**uint256(decimals());
         _mint(_owner, TOTAL_SUPPLY);
     }
-function transferWithUsage(address recipient, uint256 amount /*,uint256 usage*/) public {
-    
 
+    function transferWithUsage(address recipient, uint256 amount /*, uint256 usage*/) public {
         transfer(recipient, amount);
         // Additional logic to record energy usage can be added here
     }
@@ -23,5 +22,9 @@ function transferWithUsage(address recipient, uint256 amount /*,uint256 usage*/)
         for (uint256 i = 0; i < recipients.length; i++) {
             transfer(recipients[i], amounts[i]);
         }
+    }
+
+    function burn(uint256 amount) public {
+        _burn(msg.sender, amount);
     }
 }
