@@ -1,4 +1,4 @@
- # WakandaPower  ERC2
+![image](https://github.com/ashutoshsharan2003/ETH-AVAX-PROOF--Types-of-Functions/assets/141537249/c5e026b0-8018-4b55-a867-e755bb9bebfc) # WakandaPower  ERC2
  This is a Solidity smart contract called "WakandaPower" that inherits from the OpenZeppelin ERC20 and Ownable contracts. 
 
 
@@ -61,9 +61,8 @@ contract WakandaPower is ERC20, Ownable {
         TOTAL_SUPPLY = 100000000 * 10**uint256(decimals());
         _mint(_owner, TOTAL_SUPPLY);
     }
-function transferWithUsage(address recipient, uint256 amount /*,uint256 usage*/) public {
-    
 
+    function transferWithUsage(address recipient, uint256 amount /*, uint256 usage*/) public {
         transfer(recipient, amount);
         // Additional logic to record energy usage can be added here
     }
@@ -74,7 +73,12 @@ function transferWithUsage(address recipient, uint256 amount /*,uint256 usage*/)
             transfer(recipients[i], amounts[i]);
         }
     }
+
+    function burn(uint256 amount) public {
+        _burn(msg.sender, amount);
+    }
 }
+
 ```
 
 ###### Author
