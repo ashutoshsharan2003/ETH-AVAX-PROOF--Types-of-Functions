@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract WakandaPower is ERC20, Ownable {
     uint256 public TOTAL_SUPPLY;
 
-    constructor(address _owner) ERC20("WakandaPower", "WKN") Ownable(_owner) {
+    constructor(address _owner) ERC20("WakandaPower", "WKN") Ownable() {
         TOTAL_SUPPLY = 100000000 * 10**uint256(decimals());
         _mint(_owner, TOTAL_SUPPLY);
     }
@@ -22,6 +22,10 @@ contract WakandaPower is ERC20, Ownable {
         for (uint256 i = 0; i < recipients.length; i++) {
             transfer(recipients[i], amounts[i]);
         }
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
     }
 
     function burn(uint256 amount) public {
